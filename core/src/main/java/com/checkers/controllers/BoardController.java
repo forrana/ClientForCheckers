@@ -103,7 +103,6 @@ public class BoardController {
         validator.setNetTargetCell(iX, iY);
         targetCell = board.getCellByGLCoord(iX, iY);
 
-
         String result;
         result = validator.doCheckMove();
         System.out.println("result:"+result);

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
+import com.checkers.controllers.MoveValidator;
 import com.checkers.model.Board;
 import com.checkers.model.Cell;
 import com.checkers.model.Checker;
@@ -59,7 +60,8 @@ public class WorldRenderer {
 		this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
 		//this.cam.rotate(180);
 		this.cam.position.set(CAMERA_WIDTH / 2f, (CAMERA_HEIGHT / 2f), 0);
-		this.cam.update();
+		this.cam.rotate(180);
+        this.cam.update();
 		this.debug = debug;
 		spriteBatch = new SpriteBatch();
 		loadTextures();
@@ -105,19 +107,20 @@ public class WorldRenderer {
 	}
 
 	private void drawCells() {
-		for (Cell cell : board.getCells()) {
+        //MoveValidator.isPlayer0
+        for (Cell cell : board.getCells()) {
 			if(cell.getColor()){
 				spriteBatch.draw(cellBlackTexture, cell.getPosition().x * ppuX, 
 						cell.getPosition().y * ppuY, Cell.SIZE * ppuX, Cell.SIZE * ppuY);
 			}	
 			else spriteBatch.draw(cellWhiteTexture, cell.getPosition().x * ppuX, 
-					cell.getPosition().y * ppuY, Cell.SIZE * ppuX, Cell.SIZE * ppuY);
-			
+					    cell.getPosition().y * ppuY, Cell.SIZE * ppuX, Cell.SIZE * ppuY);
 		}
 	}
 
 	private void drawBorder(){
-		for(int i = 0; i < 8; i++){	
+		for(int i = 0; i < 8; i++){
+            spriteBatch.
 			spriteBatch.draw(boardBottomLetters[i], (i+0.5f) * ppuX, 
 					0f * ppuY, 1f * ppuX, 0.5f * ppuY);
 			spriteBatch.draw(boardLeftNumbers[i], 0.0f * ppuX, 

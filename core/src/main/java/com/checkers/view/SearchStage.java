@@ -261,11 +261,11 @@ public class SearchStage {
         tableGameDetail.row();
 
         final TextButton buttonBack = new TextButton("<- Back", style);
-        final TextButton button = new TextButton("*******CONNECT********", style);
-        button.center().center();
+        final TextButton buttonConnect = new TextButton("*******CONNECT********", style);
+        buttonConnect.center().center();
 
         tableGameDetail.add();
-        tableGameDetail.add(button);
+        tableGameDetail.add(buttonConnect);
 
         table.add(tableGameDetail);
 
@@ -322,9 +322,9 @@ public class SearchStage {
             }
         });
 
-        boolean b = button.addListener(new ChangeListener() {
+        boolean b = buttonConnect.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println("Clicked! Is checked: " + button.isChecked());
+                System.out.println("Clicked! Is checked: " + buttonConnect.isChecked());
                 int index = gameList.getSelectedIndex();
 
                if( games.get(index).getWhite() != null &&

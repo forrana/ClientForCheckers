@@ -1,9 +1,8 @@
 package com.checkers.view;
 
 /**
- * Created by forrana on 06.06.14.
+ * Created by forrana on 14.06.14.
  */
-
         import CheckersClient.core.CheckersClient;
         import com.badlogic.gdx.Gdx;
         import com.badlogic.gdx.graphics.*;
@@ -20,7 +19,7 @@ package com.checkers.view;
         import com.checkers.network.client.NetworkClient;
 
 
-public class EndGameStage {
+public class InGameMenuStage {
     private static final float CAMERA_WIDTH = 8.5f;
     private static final float CAMERA_HEIGHT = 8.5f;
 
@@ -33,8 +32,7 @@ public class EndGameStage {
     SpriteBatch batch;
     String endMessage;
 
-    public EndGameStage(String message, CheckersClient client){
-        endMessage = message;
+    public InGameMenuStage(CheckersClient client){
         thisClient = client;
         create ();
     }
@@ -92,12 +90,13 @@ public class EndGameStage {
         exitButton.center().center();
         final TextButton mainMenuButton = new TextButton("Main menu", style);
         mainMenuButton.center().center();
+        final TextButton returnButton = new TextButton("Return", style);
+        returnButton.center().center();
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.background = background;
         labelStyle.font = font;
         labelStyle.fontColor = Color.BLACK;
-
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.background = tEdit;
@@ -106,9 +105,7 @@ public class EndGameStage {
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.selection = tButton;
 
-        final Label endMessage = new Label(this.endMessage, labelStyle);
-        table.add(endMessage);
-        table.row();
+        table.add(returnButton);
         table.row();
         table.add(mainMenuButton);
         table.row();
@@ -124,6 +121,13 @@ public class EndGameStage {
                 NetworkClient.gameH.game = null;
                 NetworkClient.lastStep = null;
                 thisClient.setScreen(thisClient.mMenu);
+            }
+        });
+        returnButton.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                //NetworkClient.gameH.game = null;
+                //NetworkClient.lastStep = null;
+                thisClient.setScreen(thisClient.game);
             }
         });
 
@@ -143,6 +147,6 @@ public class EndGameStage {
 
     public void dispose() {
         stage.dispose();
-        skin.dispose();
+//        skin.dispose();
     }
 }

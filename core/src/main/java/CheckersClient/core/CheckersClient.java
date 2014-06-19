@@ -16,6 +16,7 @@ public class CheckersClient extends Game {
     public Registration registration;
     public EndGameScreen endGame;
     public WaitingScreen waitingScreen;
+    public InGameMenu inGameMenu;
     public static NetworkClient networkClient; //= new NetworkClient();
 	
 	public void create() {
@@ -28,6 +29,7 @@ public class CheckersClient extends Game {
         search = new Search(this, networkClient);
         registration = new Registration(this, networkClient);
         endGame = new EndGameScreen("hhh",this);
+        inGameMenu = new InGameMenu(this);
 
         setScreen(login);
        // setScreen(search);
