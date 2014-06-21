@@ -65,7 +65,6 @@ public class GameListener implements Runnable{
 
 //		System.out.println("IsCanceled");
         isCancel =  true;
-        // TODO Auto-generated method stub
     }
 
 

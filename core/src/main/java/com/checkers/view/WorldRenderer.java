@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
 import com.checkers.controllers.MoveValidator;
 import com.checkers.model.Board;
@@ -38,7 +39,8 @@ public class WorldRenderer {
 	private TextureRegion checkerWhiteQueenTexture;
  	private TextureRegion boardBottomLetters[] = new TextureRegion[8];
  	private TextureRegion boardLeftNumbers[]   = new TextureRegion[8];
-	
+
+    Matrix4 mx4RotateBoard = new Matrix4();
 	private SpriteBatch spriteBatch;
 	private boolean debug = true;
 	private int width;
@@ -60,11 +62,12 @@ public class WorldRenderer {
 		this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
 		//this.cam.rotate(180);
 		this.cam.position.set(CAMERA_WIDTH / 2f, (CAMERA_HEIGHT / 2f), 0);
-		this.cam.rotate(180);
+		//this.cam.rotate(180);
         this.cam.update();
 		this.debug = debug;
 		spriteBatch = new SpriteBatch();
 		loadTextures();
+        //mx4RotateBoard.setToRotation(new Vector3(8,8,0), 180);
 	}
 	
 	private void loadTextures() {
@@ -90,7 +93,9 @@ public class WorldRenderer {
 	
 	
 	public void render() {
-		spriteBatch.begin();
+
+        spriteBatch.setTransformMatrix(mx4RotateBoard);
+        spriteBatch.begin();
 			drawCells();
 			drawChecker();
 			drawBorder();
@@ -100,18 +105,20 @@ public class WorldRenderer {
 			drawDebug();
 	}
 	public void selChecker(float posX, float posY){
-	
+
 	//	Checker checker = board.getCheckerByCoord(posX, posY);	
 	//	if(checker != null)checker.setSelected();
 		
 	}
 
 	private void drawCells() {
-        //MoveValidator.isPlayer0
+        //MoveValidator.isPlayerWhite
         for (Cell cell : board.getCells()) {
 			if(cell.getColor()){
-				spriteBatch.draw(cellBlackTexture, cell.getPosition().x * ppuX, 
-						cell.getPosition().y * ppuY, Cell.SIZE * ppuX, Cell.SIZE * ppuY);
+			//	spriteBatch.draw(cellBlackTexture, cell.getPosition().x * ppuX,
+    		//				cell.getPosition().y * ppuY, Cell.SIZE * ppuX, Cell.SIZE * ppuY);
+                spriteBatch.draw(cellBlackTexture, cell.getPosition().x * ppuX,
+                        cell.getPosition().y * ppuY, Cell.SIZE * ppuX, Cell.SIZE * ppuY);
 			}	
 			else spriteBatch.draw(cellWhiteTexture, cell.getPosition().x * ppuX, 
 					    cell.getPosition().y * ppuY, Cell.SIZE * ppuX, Cell.SIZE * ppuY);
@@ -119,14 +126,22 @@ public class WorldRenderer {
 	}
 
 	private void drawBorder(){
-		for(int i = 0; i < 8; i++){
-            spriteBatch.
-			spriteBatch.draw(boardBottomLetters[i], (i+0.5f) * ppuX, 
-					0f * ppuY, 1f * ppuX, 0.5f * ppuY);
-			spriteBatch.draw(boardLeftNumbers[i], 0.0f * ppuX, 
-					(i + 0.5f) * ppuY, 0.5f * ppuX, 1f * ppuY);
-		}	
-	}
+        if(MoveValidator.isPlayerWhite)
+            for(int i = 0; i < 8; i++){
+                spriteBatch.draw(boardBottomLetters[i], (i+0.5f) * ppuX,
+                        0f * ppuY, 1f * ppuX, 0.5f * ppuY);
+                spriteBatch.draw(boardLeftNumbers[i], 0.0f * ppuX,
+                        (i + 0.5f) * ppuY, 0.5f * ppuX, 1f * ppuY);
+		}
+        else
+            for(int i = 0; i < 8 ; i++){
+                spriteBatch.draw(boardBottomLetters[7-i], (i+0.5f) * ppuX,
+                        0f * ppuY, 1f * ppuX, 0.5f * ppuY);
+                spriteBatch.draw(boardLeftNumbers[7-i], 0.0f * ppuX,
+                        (i + 0.5f) * ppuY, 0.5f * ppuX, 1f * ppuY);
+            }
+
+    }
 	
 
 	

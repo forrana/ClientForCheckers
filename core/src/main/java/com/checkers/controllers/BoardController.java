@@ -60,17 +60,18 @@ public class BoardController {
       //This making for enforce from crash in case no checker choose.
       try{
         selectedChecker = board.getCheckerByDeskCoord(iX, iY);
+
         //Here we compare color selected checker with player color
         //And if fighting in progress check fighting checker with selected
-        System.out.println(selectedChecker.getColor() + " : " + MoveValidator.isPlayer0);
+        System.out.println(selectedChecker.getColor() + " : " + MoveValidator.isPlayerWhite);
+        System.out.println("GL pos:"+selectedChecker.getPosition());
         System.out.println(MoveValidator.getFightinChecker() == null);
 
-        if(selectedChecker.getColor() != MoveValidator.isPlayer0 &&
+        if(selectedChecker.getColor() != MoveValidator.isPlayerWhite &&
           (MoveValidator.getFightinChecker() == null ||
            MoveValidator.getFightinChecker().getIndex() == selectedChecker.getIndex())
           ){
 		    validator.setSelectedChecker(iX, iY);
-            System.out.println(iX + ':'+ iY);
             startCell = board.getCellByDeskCoord(iX, iY);
         }
       }
@@ -81,7 +82,7 @@ public class BoardController {
         //Here we compare color selected checker with player color
         //And if fighting in progress check fighting checker with selected
         try{
-        if(selectedChecker.getColor() != MoveValidator.isPlayer0 &&
+        if(selectedChecker.getColor() != MoveValidator.isPlayerWhite &&
            (MoveValidator.getFightinChecker() == null ||
                    (MoveValidator.getFightinChecker().getIndex() == selectedChecker.getIndex()))
           ){
@@ -166,6 +167,10 @@ public class BoardController {
     }
 
     private String moveToStr(float x, float y){
+        if(!MoveValidator.isPlayerWhite){
+            x = 8.0f - x;
+            y = 8.0f - y;
+        }
         String currStep = new String();
         if(currStep.length() != 0)currStep += '-';
         currStep += (char)((int)(x - board.getBoardBottom()) + (int)'a');
@@ -305,7 +310,7 @@ public class BoardController {
         /** The main update method **/
 	public void update(float delta) {
           //if(false){
-		if(validator.isPlayer0 == validator.isBlackTurn){
+		if(validator.isPlayerWhite == validator.isBlackTurn){
 			if(isExec){
                     gameListener = new GameListener(network);
 					ExecutorService exec = Executors.newSingleThreadExecutor();

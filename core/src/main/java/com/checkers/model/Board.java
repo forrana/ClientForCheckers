@@ -4,6 +4,8 @@ package com.checkers.model;
  */
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.checkers.controllers.MoveValidator;
+
 /**
  * 
  * @author forrana
@@ -30,9 +32,41 @@ public class Board {
 		
 			boolean black = true;
 			boolean flag = true;
+
+            float blackEndY;
+            float blackStartY;
+            float whiteEndY;
+            float whiteStartY;
+            // Firstly I Think black and white side have another placement. But It's wrang therefor this var - const now
+            // May be I refactor this thing latter
+            blackStartY = 5;
+            blackEndY = 8;
+
+            whiteStartY = 0;
+            whiteEndY = 3;
+
+
+
+            if(!MoveValidator.isPlayerWhite){ //Is black
+          /*      blackStartY = 0;
+                blackEndY = 3;
+
+                whiteStartY = 5;
+                whiteEndY = 8;*/
+                black = !black;
+            }else{
+                /*
+                blackStartY = 5;
+                blackEndY = 8;
+
+                whiteStartY = 0;
+                whiteEndY = 3;
+                */
+
+            }
 			//desk's loop
 			//place white cheker's
-			 for(float i = BOARD_BOTTOM; i < BOARD_BOTTOM + 3f; i++){
+			 for(float i = BOARD_BOTTOM + whiteStartY; i < BOARD_BOTTOM + whiteEndY; i++){
 				 for(float j = BOARD_BOTTOM;j < BOARD_BOTTOM + 8f; j = j+2){
 					 if(flag)checkers.add(new Checker(new Vector2(j,i), !black, checkers.size));
 					 	else checkers.add(new Checker(new Vector2(j+1,i), !black, checkers.size));
@@ -41,15 +75,15 @@ public class Board {
 			 }
 			 
 			 //place black checker's
-			
-			 for(float i = BOARD_BOTTOM + 5f; i < BOARD_BOTTOM + 8f; i++){
+
+			 for(float i = BOARD_BOTTOM + blackStartY; i < BOARD_BOTTOM + blackEndY; i++){
 				 for(float j = BOARD_BOTTOM;j < BOARD_BOTTOM + 8f; j = j+2){
 					 if(flag)checkers.add(new Checker(new Vector2(j,i), black, checkers.size));
 					 	else checkers.add(new Checker(new Vector2(j+1,i), black, checkers.size));
 				 }	 
 				 flag = !flag;
 			 }
-					
+			 if(!MoveValidator.isPlayerWhite)black = !black;
 			 for(float j = BOARD_BOTTOM; j < BOARD_BOTTOM + 8f; j++){		 		 
 		        	for(float i = BOARD_BOTTOM; i < BOARD_BOTTOM + 8f; i++){  			        	        		          	      		
 		     	        if(black){
@@ -114,7 +148,7 @@ public class Board {
 		return null;
 	}
 	
-	public Cell getCellByGLCoord(float x, float y) {
+	public Cell getCellByGLCoord(float x, float y){
 			
 			//for(Cell cell : cells){
             Cell cell;

@@ -9,7 +9,7 @@ import com.checkers.network.client.NetworkClient;
 //TODO It's class only for validation, all another code, methods and functions shell be in other classes
 
 public class MoveValidator {
-	public static boolean isPlayer0 =true;//manual user switcher
+	public static boolean isPlayerWhite =true;//manual user switcher
 	private static String currStep = new String();
     private static int  fightsBefore = 0;
 	private String		currMark;
@@ -40,8 +40,8 @@ public class MoveValidator {
 	public MoveValidator(Board inpBoard){
         System.out.println("game="+NetworkClient.gameH.game.getGauid());
         if(NetworkClient.gameH.game.getWhite().getUuid() ==
-                NetworkClient.userH.curUser.getUuid())MoveValidator.isPlayer0 = true;
-            else   MoveValidator.isPlayer0 = false;
+                NetworkClient.userH.curUser.getUuid())MoveValidator.isPlayerWhite = true;
+            else   MoveValidator.isPlayerWhite = false;
 		this.board = inpBoard;
 		BOARD_BOTTOM = inpBoard.getBoardBottom();
 	}
@@ -123,7 +123,7 @@ public class MoveValidator {
 		setIsEndMove();
 	}
 	
-	public boolean blackOrWhite(){
+	public boolean isBlackOrWhiteCell(){
 		
 		if(selectedChecker != null && targetCell != null && targetCell.getColor()){
 			
@@ -143,7 +143,7 @@ public class MoveValidator {
 	
 	public boolean oneCell(){
 		float a,b;
-		if(blackOrWhite()){
+		if(isBlackOrWhiteCell()){
 			a = startCell.getPosition().x - targetCell.getPosition().x;
 			b = startCell.getPosition().y - targetCell.getPosition().y;
 			a = Math.abs(a);
@@ -153,7 +153,7 @@ public class MoveValidator {
 		return false;
 	}
 	public boolean isBeasy(){
-		if(blackOrWhite()){		
+		if(isBlackOrWhiteCell()){
 			if(board.getCheckerByGLCoord(targetCell.getPosition().x,targetCell.getPosition().y) != null){
 				return true;
 			}
@@ -411,7 +411,7 @@ public class MoveValidator {
         int   killedCount = 0;
 		boolean returnFlag = false;
 		
-		if(!blackOrWhite())return false;
+		if(!isBlackOrWhiteCell())return false;
 		
 		if(inQueen != null){		
 			
@@ -551,7 +551,7 @@ public class MoveValidator {
 	// set direction and type of move
 	public boolean twoCell(){
 		float a,b;
-		if(blackOrWhite()){
+		if(isBlackOrWhiteCell()){
 			a = startCell.getPosition().x - targetCell.getPosition().x;
 			b = startCell.getPosition().y - targetCell.getPosition().y;
 			if(a == -1 && b == -1) dir = Direction.RIGHTUP;
@@ -671,7 +671,7 @@ public class MoveValidator {
                         }
 
                 }
-                if(isBlackTurn != isPlayer0){
+                if(isBlackTurn != isPlayerWhite){
                     result = "4";
                 }else result = "2";
                     isCanFight = true;
@@ -702,7 +702,7 @@ public class MoveValidator {
                          return "7";
                      }
                  }
-                 if(isBlackTurn != isPlayer0){
+                 if(isBlackTurn != isPlayerWhite){
                      result = "7";
                  }else result = "2";
 
@@ -731,7 +731,7 @@ public class MoveValidator {
 	private boolean checkQueen(){
         System.out.println("check queen:" + selectedChecker.getPosition().y);
 		if(selectedChecker != null && !selectedChecker.getQueen()){
-			if(selectedChecker.getColor()){
+			if(selectedChecker.getColor() == isPlayerWhite){
 				if(selectedChecker.getPosition().y == BOARD_BOTTOM){
 							selectedChecker.setQueen();
 							return true;
@@ -741,7 +741,7 @@ public class MoveValidator {
 					        selectedChecker.setQueen();
 					        return true;
 				}
-			}	
+			}
 		}
 		return false;
 	}
@@ -756,10 +756,19 @@ public class MoveValidator {
 	
 	public Vector2 strToMove(String move){
 		Vector2 coord = new Vector2();
-		String sX, sY;
+        Vector2 coordBlack = new Vector2();
+
+        String sX, sY;
 		sY = move.substring(1);
-				coord.x = (int)move.toCharArray()[0] - (int)'a' + board.getBoardBottom();
+				coord.x = (int)move.toCharArray()[0] - (int)'a' + board.getBoardBottom();   //therefore a-a = 0;
 				coord.y = Integer.parseInt(sY) - board.getBoardBottom();
+        System.out.println("base coord:" + coord);
+        if(!isPlayerWhite){
+            coordBlack.x = 8.0f - coord.x;
+            coordBlack.y = 8.0f - coord.y;
+            System.out.println("Black coord:" + coordBlack);
+            return coordBlack;
+        }
 		return coord;
 	}
 	
@@ -769,7 +778,7 @@ public class MoveValidator {
 		if(isCanFight){
 			if(!moveOneCell() || bool)isSucsess = returnChecker();
 				else {
-                    if(isBlackTurn != isPlayer0){
+                    if(isBlackTurn != isPlayerWhite){
                         isSucsess = "3";
                     }else isSucsess = "2";
 				}
@@ -839,7 +848,7 @@ public class MoveValidator {
 	//this function return false if something here on queen patch
 	private boolean isQueenPatchFree(){
 		if(!isCanFight) return false;
-		if(!blackOrWhite())return false;
+		if(!isBlackOrWhiteCell())return false;
 		
 		float tmpX, tmpY;
 		float maxTmpX, maxTmpY;
@@ -1023,7 +1032,7 @@ public class MoveValidator {
                 return returnChecker();
         }
 		else if(isQueenPatchFree()){
-				if(isBlackTurn != isPlayer0){
+				if(isBlackTurn != isPlayerWhite){
 					result = "3";
 				}else result = "2";
 
@@ -1096,9 +1105,9 @@ public class MoveValidator {
 							case TWORIGHTUP 	:
 							case TWORIGHTDOWN 	: isSucsess=((tmpResult=twoSteps()) != "0")? tmpResult : "0";break;
 							case LEFTUP			:
-							case RIGHTUP		: isSucsess=((tmpResult = oneStep(selectedChecker.getColor())) != "0") ? tmpResult : "0";break;
+							case RIGHTUP		: isSucsess=((tmpResult = oneStep(!(selectedChecker.getColor() ^ MoveValidator.isPlayerWhite))) != "0") ? tmpResult : "0";break;
 							case RIGHTDOWN		:
-							case LEFTDOWN		: isSucsess=((tmpResult = oneStep(!selectedChecker.getColor())) != "0") ? tmpResult : "0";break;
+							case LEFTDOWN		: isSucsess=((tmpResult = oneStep(selectedChecker.getColor() ^ MoveValidator.isPlayerWhite)) != "0") ? tmpResult : "0";break;
 							case NOTHING 		: returnChecker();break;			
 						}	
 				}else{

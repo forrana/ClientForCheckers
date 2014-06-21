@@ -47,9 +47,13 @@ public class GameScreen implements Screen, InputProcessor{
 
 	@Override
 	public void show() {
-		board = new Board();
-		renderer = new WorldRenderer(board, true);
-		validator = new MoveValidator(board);
+        if(NetworkClient.gameH.game.getWhite().getUuid() ==
+                NetworkClient.userH.curUser.getUuid())MoveValidator.isPlayerWhite = true;
+        else   MoveValidator.isPlayerWhite = false;
+
+        board = new Board();
+        validator = new MoveValidator(board);
+        renderer = new WorldRenderer(board, true);
 		controller = new BoardController(board, validator, thisClient);
 		Gdx.input.setInputProcessor(this);
 	}
@@ -94,7 +98,8 @@ public class GameScreen implements Screen, InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if(validator.isBlackTurn != validator.isPlayer0){
+        System.out.println("coord:"+ screenX + ":" + screenY);
+		if(validator.isBlackTurn != validator.isPlayerWhite){
 			controller.setCoord1(screenX, screenY);
 			renderer.selChecker(screenX, screenY);
 		}
@@ -103,7 +108,8 @@ public class GameScreen implements Screen, InputProcessor{
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if(validator.isBlackTurn != validator.isPlayer0){
+
+		if(validator.isBlackTurn != validator.isPlayerWhite){
 			controller.setCoord2(screenX, screenY);
 			renderer.selChecker(screenX, screenY);
 			controller.setIsMove(true);
