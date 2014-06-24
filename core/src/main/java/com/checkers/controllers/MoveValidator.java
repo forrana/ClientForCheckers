@@ -562,7 +562,7 @@ public class MoveValidator {
 			if(a == -2 && b == -2){
 				dir = Direction.TWORIGHTUP;
 				if((tmpChecker = board.getCheckerByGLCoord(startCell.getPosition().x+1.0f,
-						startCell.getPosition().y+1.0f)) != null){
+						startCell.getPosition().y+1.0f)) != null && checkColor()){
                             tmpChecker.setIsKilled();
 							return true;
 				}				
@@ -570,7 +570,7 @@ public class MoveValidator {
 			if(a == -2 && b == 2){
 				dir = Direction.TWORIGHTDOWN;
 				if((tmpChecker = board.getCheckerByGLCoord(startCell.getPosition().x+1.0f,
-						startCell.getPosition().y-1.0f)) != null){
+						startCell.getPosition().y-1.0f)) != null && checkColor()){
                             tmpChecker.setIsKilled();
                             return true;
 				}		
@@ -578,7 +578,7 @@ public class MoveValidator {
 			if(a == 2 && b == 2){
 				dir = Direction.TWOLEFTDOWN;
 				if((tmpChecker = board.getCheckerByGLCoord(startCell.getPosition().x-1.0f,
-						startCell.getPosition().y-1.0f)) != null){
+						startCell.getPosition().y-1.0f)) != null && checkColor()){
                             tmpChecker.setIsKilled();
 							return true;
 				}
@@ -586,7 +586,7 @@ public class MoveValidator {
                 if(a == 2 && b == -2){
                     dir = Direction.TWOLEFTUP;
                     if((tmpChecker = board.getCheckerByGLCoord(startCell.getPosition().x-1.0f,
-                            startCell.getPosition().y+1.0f)) != null){
+                            startCell.getPosition().y+1.0f)) != null && checkColor()){
                                 tmpChecker.setIsKilled();
                                 return true;
                     }
@@ -612,7 +612,7 @@ public class MoveValidator {
 	
 	public boolean moveOneCell(){
 		if(oneCell() && !isBeasy()){
-			checkQueen();
+			//checkQueen();
 			return true;
 		}
 		return false;
@@ -647,7 +647,7 @@ public class MoveValidator {
 	}
 	
 	//do checker fight or return it
-	private String twoSteps(){
+	private String twoCellStep(){
         String result = "0";
 		 if(fightsBefore == 0){
             if(!moveTwoCell()){
@@ -729,15 +729,21 @@ public class MoveValidator {
 	
 	//if checker arrived on end of board - transform it in queen
 	private boolean checkQueen(){
-        System.out.println("check queen:" + selectedChecker.getPosition().y);
-		if(selectedChecker != null && !selectedChecker.getQueen()){
+
+        if(selectedChecker != null && !selectedChecker.getQueen()){
+            System.out.println("check queen:" + selectedChecker.getPosition().y);
+            System.out.println("check ColorCH:" + selectedChecker.getColor());
+            System.out.println("check ColorPL:" + isPlayerWhite);
+
 			if(selectedChecker.getColor() == isPlayerWhite){
-				if(selectedChecker.getPosition().y == BOARD_BOTTOM){
+				if(selectedChecker.getPosition().y <= BOARD_BOTTOM){
 							selectedChecker.setQueen();
 							return true;
 				}
 			}else{
-				if(selectedChecker.getPosition().y == (7f+BOARD_BOTTOM)){
+				if(selectedChecker.getPosition().y <= (8f-BOARD_BOTTOM) &&
+                   selectedChecker.getPosition().y > (8f-BOARD_BOTTOM-1.0f)
+                        ){
 					        selectedChecker.setQueen();
 					        return true;
 				}
@@ -778,6 +784,8 @@ public class MoveValidator {
 		if(isCanFight){
 			if(!moveOneCell() || bool)isSucsess = returnChecker();
 				else {
+                selectedChecker.setPosition(targetCell.getPosition());
+                checkQueen();
                     if(isBlackTurn != isPlayerWhite){
                         isSucsess = "3";
                     }else isSucsess = "2";
@@ -1103,7 +1111,7 @@ public class MoveValidator {
 							case TWOLEFTUP 		:
 							case TWOLEFTDOWN 	:
 							case TWORIGHTUP 	:
-							case TWORIGHTDOWN 	: isSucsess=((tmpResult=twoSteps()) != "0")? tmpResult : "0";break;
+							case TWORIGHTDOWN 	: isSucsess=((tmpResult= twoCellStep()) != "0")? tmpResult : "0";break;
 							case LEFTUP			:
 							case RIGHTUP		: isSucsess=((tmpResult = oneStep(!(selectedChecker.getColor() ^ MoveValidator.isPlayerWhite))) != "0") ? tmpResult : "0";break;
 							case RIGHTDOWN		:
@@ -1123,7 +1131,7 @@ public class MoveValidator {
 				}	
 			}else returnChecker();
 		}
-      //  endCheckerMove();
+       // endCheckerMove();
 	  // }else returnChecker();
         System.out.println("killFlag:"+isCanFight);
         System.out.println("Sucsess code:"+isSucsess);
