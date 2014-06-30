@@ -1,1 +1,13 @@
 /.idea/*
+/CheckersClient.iml
+/android/CheckersClient-android.iml
+/core/CheckersClient-core.iml
+/core/target/
+/desktop/CheckersClient-desktop.iml
+/desktop/hs_err_pid18765.log
+/desktop/target
+/*.log
+/html/CheckersClient-html.iml
+/html/target/*
+/ios/*
+/android/target/

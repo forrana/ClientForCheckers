@@ -188,7 +188,10 @@ public class BoardController {
             boolean serverIsAllowed = network.sendStepInStr(currResult, validator.isBlackTurn);
 
             System.out.println(serverIsAllowed);
-            if(serverIsAllowed)selectedChecker.setPosition(targetCell.getPosition());
+            if(serverIsAllowed){
+                selectedChecker.setPosition(targetCell.getPosition());
+                validator.checkQueen();
+            }
                 else{
                     selectedChecker.setPosition(startCell.getPosition());
                     return false;

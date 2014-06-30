@@ -612,7 +612,6 @@ public class MoveValidator {
 	
 	public boolean moveOneCell(){
 		if(oneCell() && !isBeasy()){
-			//checkQueen();
 			return true;
 		}
 		return false;
@@ -728,7 +727,7 @@ public class MoveValidator {
 	}
 	
 	//if checker arrived on end of board - transform it in queen
-	private boolean checkQueen(){
+	public boolean checkQueen(){
 
         if(selectedChecker != null && !selectedChecker.getQueen()){
             System.out.println("check queen:" + selectedChecker.getPosition().y);
@@ -736,13 +735,13 @@ public class MoveValidator {
             System.out.println("check ColorPL:" + isPlayerWhite);
 
 			if(selectedChecker.getColor() == isPlayerWhite){
-				if(selectedChecker.getPosition().y <= BOARD_BOTTOM){
+				if(targetCell.getPosition().y <= BOARD_BOTTOM){
 							selectedChecker.setQueen();
 							return true;
 				}
 			}else{
-				if(selectedChecker.getPosition().y <= (8f-BOARD_BOTTOM) &&
-                   selectedChecker.getPosition().y > (8f-BOARD_BOTTOM-1.0f)
+				if(targetCell.getPosition().y <= (8f-BOARD_BOTTOM) &&
+                        targetCell.getPosition().y > (8f-BOARD_BOTTOM-1.0f)
                         ){
 					        selectedChecker.setQueen();
 					        return true;
@@ -784,11 +783,11 @@ public class MoveValidator {
 		if(isCanFight){
 			if(!moveOneCell() || bool)isSucsess = returnChecker();
 				else {
-                selectedChecker.setPosition(targetCell.getPosition());
-                checkQueen();
                     if(isBlackTurn != isPlayerWhite){
                         isSucsess = "3";
                     }else isSucsess = "2";
+
+                    checkQueen();
 				}
 		}
 		else {
@@ -800,6 +799,7 @@ public class MoveValidator {
 		if(!checkMove(isBlackTurn)){
             isCanFight = false;
         }
+///        selectedChecker.setPosition(targetCell.getPosition());
         return isSucsess;
 	}
 	
@@ -1117,8 +1117,9 @@ public class MoveValidator {
 							case RIGHTDOWN		:
 							case LEFTDOWN		: isSucsess=((tmpResult = oneStep(selectedChecker.getColor() ^ MoveValidator.isPlayerWhite)) != "0") ? tmpResult : "0";break;
 							case NOTHING 		: returnChecker();break;			
-						}	
-				}else{
+						}
+
+                }else{
                         String tmpResult;
 						setDirection();
 						switch(dir){
