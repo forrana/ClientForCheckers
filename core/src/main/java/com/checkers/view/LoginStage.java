@@ -133,14 +133,19 @@ public class LoginStage {
 
         button.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                if(!loginT.getText().isEmpty() || !passwordT.getText().isEmpty()){
+                if(!loginT.getText().isEmpty() || !passwordT.getText().isEmpty()) {
                     NetworkClient.auth(loginT.getText(), passwordT.getText());
-                    if(checkAuthorization()){
-                        System.out.println("AllOk");
-                        System.out.println("user name:"+NetworkClient.userN);
-                        thisClient.setScreen(thisClient.mMenu);
-                    }else System.out.println("Wrong data!!!!");
-                }else System.out.println("Fill fields please!");
+                    try {
+                        if (checkAuthorization()) {
+                            System.out.println("AllOk");
+                            System.out.println("user name:" + NetworkClient.userN);
+                            thisClient.setScreen(thisClient.mMenu);
+                        } else System.out.println("Wrong data!!!!");
+                    }catch(Exception e){
+                        System.out.println("Something wrong!");
+                    }
+                    }else System.out.println("Fill fields please!");
+
             }
         });
         buttonReg.addListener(new ChangeListener() {
