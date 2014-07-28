@@ -19,9 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.checkers.network.client.NetworkClient;
+import com.checkers.support.fonts.FontGenerator;
 
 
 public class LoginStage {
@@ -47,6 +46,9 @@ public class LoginStage {
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+
+        FontGenerator fontGenerator = new FontGenerator();
+        BitmapFont font = fontGenerator.getFont();
 
         NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("data/bwNine.png")), 12, 12, 12, 12);
         NinePatchDrawable draw = new NinePatchDrawable(patch);
@@ -77,9 +79,6 @@ public class LoginStage {
 
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), greenC,background);
 
-        BitmapFont font = new BitmapFont();
-        font.scale(1.3f);
-
         TextButton.TextButtonStyle style;
         style = new TextButton.TextButtonStyle();
         style.font = font;
@@ -93,8 +92,10 @@ public class LoginStage {
 // Instantiate the Button itself.
         final TextButton button = new TextButton("Submit", style);
         button.center().center();
+        button.setWidth(Gdx.graphics.getWidth() / 3);
         final TextButton buttonReg = new TextButton("Registration", style);
         buttonReg.center().center();
+        buttonReg.setWidth(Gdx.graphics.getWidth() / 3);
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.background = background;
@@ -112,11 +113,13 @@ public class LoginStage {
         textFieldStyle.selection = tButton;
 
         final TextField loginT = new TextField("", textFieldStyle);
+        loginT.setWidth(Gdx.graphics.getWidth()/3);
         table.add(loginT);
 
         table.row();
 
         final Label passwordL = new Label("Password:", labelStyle);
+        passwordL.setWidth(Gdx.graphics.getWidth()/3);
         table.add(passwordL);
 
         final TextField passwordT = new TextField("",textFieldStyle);
@@ -142,6 +145,9 @@ public class LoginStage {
                             thisClient.setScreen(thisClient.mMenu);
                         } else System.out.println("Wrong data!!!!");
                     }catch(Exception e){
+                        System.out.println("err!"+e.getMessage());
+                        e.printStackTrace();
+
                         System.out.println("Something wrong!");
                     }
                     }else System.out.println("Fill fields please!");
@@ -164,7 +170,7 @@ public class LoginStage {
             req = networkClient.getCurrUser();
 
             if(req != null){
-                System.out.println(req);
+                System.out.println("req:"+req);
             //    try {
               //  NetworkClient.auth();
                 networkClient.getAllGames();

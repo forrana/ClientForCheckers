@@ -18,6 +18,7 @@ package com.checkers.view;
         import com.badlogic.gdx.utils.viewport.ScreenViewport;
         import com.badlogic.gdx.utils.viewport.StretchViewport;
         import com.checkers.network.client.NetworkClient;
+        import com.checkers.support.fonts.FontGenerator;
 
 
 public class EndGameStage {
@@ -74,8 +75,9 @@ public class EndGameStage {
 
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), greenC,background);
 
-        BitmapFont font = new BitmapFont();
-        font.scale(1.3f);
+        FontGenerator fontGenerator = new FontGenerator(32);
+        BitmapFont font = fontGenerator.getFont();
+
 
         TextButton.TextButtonStyle style;
         style = new TextButton.TextButtonStyle();

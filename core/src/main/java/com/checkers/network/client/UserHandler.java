@@ -48,7 +48,7 @@ public class UserHandler {
             BufferedReader rd;
             HttpEntity entity;
             User user;
-
+            System.out.println("Link in userh:"+NetworkClient.currLink);
             HttpGet request = new HttpGet(NetworkClient.currLink + "users/me" );
             response = httpclient.execute(request,localcontext);
 

@@ -18,7 +18,7 @@ import com.checkers.model.Checker;
 
 public class WorldRenderer {
 
-	private static final float CAMERA_WIDTH = 8.5f;
+    private static final float CAMERA_WIDTH = 8.5f;
 	private static final float CAMERA_HEIGHT = 8.5f;
 	
 	private Board board;

@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.checkers.network.client.GameListener;
 import com.checkers.network.client.NetworkClient;
 import com.checkers.server.beans.Game;
+import com.checkers.support.fonts.FontGenerator;
 //import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.io.IOException;
@@ -78,10 +79,13 @@ public class NewGameStage {
         Color blueC = new Color(1f,0f,0f,1f);
 
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), greenC,draw);
+        FontGenerator fontGenerator = new FontGenerator(32);
+        BitmapFont font = fontGenerator.getFont();
+
 
         TextButton.TextButtonStyle style;
         style = new TextButton.TextButtonStyle();
-        style.font = new BitmapFont();
+        style.font = font;
         style.checkedFontColor = Color.BLACK;
         style.checkedOverFontColor = Color.BLACK;
         style.downFontColor = Color.GRAY;
@@ -93,12 +97,12 @@ public class NewGameStage {
 // **************************Elements
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.background = background;
-        labelStyle.font = new BitmapFont();
+        labelStyle.font = font;
         labelStyle.fontColor = Color.BLACK;
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.background = tEdit;
-        textFieldStyle.font = new BitmapFont();
+        textFieldStyle.font = font;
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.selection = tButton;
 

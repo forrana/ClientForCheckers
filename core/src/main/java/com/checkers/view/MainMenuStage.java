@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.checkers.support.fonts.FontGenerator;
 
 
 /**
@@ -69,8 +69,8 @@ public class MainMenuStage {
         table.setBackground(background);
         stage.addActor(table);
 
-        BitmapFont font = new BitmapFont();
-        font.scale(1.1f);
+        FontGenerator fontGenerator = new FontGenerator(26);
+        BitmapFont font = fontGenerator.getFont();
 
         // Create a new TextButtonStyle
         Color redC = new Color(1f,0f,0f,1f);

@@ -24,11 +24,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.checkers.network.client.NetworkClient;
 import com.checkers.server.beans.Game;
+import com.checkers.support.fonts.FontGenerator;
 
 import java.util.ArrayList;
 
 
 public class SearchStage {
+
     NetworkClient networkClient = new NetworkClient();
     CheckersClient thisClient = new CheckersClient();
 
@@ -99,10 +101,13 @@ public class SearchStage {
         Color redC = new Color(1f,0f,0f,1f);
         Color greenC = new Color(1f,0f,0f,1f);
         Color blueC = new Color(1f,0f,0f,1f);
+        FontGenerator fontGenerator = new FontGenerator();
+        BitmapFont font = fontGenerator.getFont();
+
 
         TextButton.TextButtonStyle style;
         style = new TextButton.TextButtonStyle();
-        style.font = new BitmapFont();
+        style.font = font;
         style.checkedFontColor = Color.BLACK;
         style.checkedOverFontColor = Color.BLACK;
         style.downFontColor = Color.GRAY;
@@ -112,20 +117,20 @@ public class SearchStage {
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.background = background;
-        labelStyle.font = new BitmapFont();
+        labelStyle.font = font;
         labelStyle.fontColor = Color.BLACK;
 
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.background = tEdit;
-        textFieldStyle.font = new BitmapFont();
+        textFieldStyle.font = font;
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.selection = tButton;
 
 
         List.ListStyle listStyle = new List.ListStyle();
         listStyle.selection = tButton;
-        listStyle.font = new BitmapFont();
+        listStyle.font = font;
         listStyle.fontColorUnselected = Color.WHITE;
         listStyle.fontColorSelected = Color.LIGHT_GRAY;
 

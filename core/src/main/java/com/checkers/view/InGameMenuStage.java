@@ -17,9 +17,11 @@ package com.checkers.view;
         import com.badlogic.gdx.utils.viewport.ScreenViewport;
         import com.badlogic.gdx.utils.viewport.StretchViewport;
         import com.checkers.network.client.NetworkClient;
+        import com.checkers.support.fonts.FontGenerator;
 
 
 public class InGameMenuStage {
+
     private static final float CAMERA_WIDTH = 8.5f;
     private static final float CAMERA_HEIGHT = 8.5f;
 
@@ -72,8 +74,8 @@ public class InGameMenuStage {
 
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), greenC,background);
 
-        BitmapFont font = new BitmapFont();
-        font.scale(1.3f);
+        FontGenerator fontGenerator = new FontGenerator();
+        BitmapFont font = fontGenerator.getFont();
 
         TextButton.TextButtonStyle style;
         style = new TextButton.TextButtonStyle();

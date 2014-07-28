@@ -34,11 +34,12 @@ public class NetworkClient {
     public static  UserHandler userH = new UserHandler();
     public static  Step lastStep = new Step();
 
-    public static final String currLink = "http://127.0.0.1:8080/checkers-0.4-SNAPSHOT/";
+    //public static final String currLink = "http://127.0.0.1:8080/checkers-0.4-SNAPSHOT/";
     //public static final String currLink = "http://192.168.0.11:8080/checkers/";
-    private static final String currHost = "127.0.0.1";
     //private static final String currHost = "192.168.0.11";
+    private static final String currHost = "127.0.0.1";
     private static final Short currPort = 8080;
+    public static final String currLink = "http://"+currHost+':'+currPort+"/checkers/";
     //public static final String currLink = "http://api.shashki.in.ua/";
     //UserHandler userH = new UserHandler();
 	SocketListener sListener = new SocketListener(this);
@@ -65,6 +66,7 @@ public class NetworkClient {
 
         userN = userName;
         pass  = iPass;
+        System.out.println("link:"+currLink);
         System.out.println(NetworkClient.userN + ':' + NetworkClient.pass);
         httpclient = new DefaultHttpClient();
         HttpHost targetHost = new HttpHost(currHost, currPort,"http");

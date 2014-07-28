@@ -18,11 +18,13 @@ package com.checkers.view;
         import com.badlogic.gdx.utils.viewport.StretchViewport;
         import com.checkers.network.client.GameListener;
         import com.checkers.network.client.NetworkClient;
+        import com.checkers.support.fonts.FontGenerator;
 
         import java.util.concurrent.ExecutorService;
         import java.util.concurrent.Executors;
 
 public class WaitingStage {
+
     private static final float CAMERA_WIDTH = 8.5f;
     private static final float CAMERA_HEIGHT = 8.5f;
 
@@ -81,8 +83,8 @@ public class WaitingStage {
 
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), greenC,background);
 
-        BitmapFont font = new BitmapFont();
-        font.scale(1.3f);
+        FontGenerator fontGenerator = new FontGenerator();
+        BitmapFont font = fontGenerator.getFont();
 
         TextButton.TextButtonStyle style;
         style = new TextButton.TextButtonStyle();

@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.checkers.network.client.NetworkClient;
+import com.checkers.support.fonts.FontGenerator;
 /*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -45,6 +46,7 @@ import java.io.IOException;
 
 
 public class RegistrationStage {
+
     CheckersClient thisClient;
     NetworkClient networkClient;
     public Stage stage;
@@ -94,8 +96,8 @@ public class RegistrationStage {
 
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), greenC,background);
 
-        BitmapFont font = new BitmapFont();
-        font.scale(1.3f);
+        FontGenerator fontGenerator = new FontGenerator();
+        BitmapFont font = fontGenerator.getFont();
 
         TextButton.TextButtonStyle style;
         style = new TextButton.TextButtonStyle();
