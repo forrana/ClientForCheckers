@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-//import org.apache.http.client.protocol.ClientContext;
-//import org.apache.http.client.protocol.ClientContext;
 
 public class NetworkClient {
 	/**

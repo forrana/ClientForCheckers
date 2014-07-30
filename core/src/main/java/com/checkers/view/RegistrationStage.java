@@ -109,8 +109,19 @@ public class RegistrationStage {
         style.fontColor = Color.BLACK;
         style.up = tButton;
 
+        String[] labels;
+        System.out.println("locale:"+java.util.Locale.getDefault().toString());
+        if(!java.util.Locale.getDefault().toString().equalsIgnoreCase("ru_RU")){
+            String[] tmp = {"Submit","Login:","Email:","Password:","Re enter pass:","Pass no match!", "Fill fields please!"};
+            labels = tmp;
+        }else{
+            String[] tmp = {"Отправить","Логин:","Email:","Пароль:","Повторите пароль:","Пароли не совпадают!",
+                            "Заполните все поля, пожалуйста!"};
+            labels =  tmp;
+        }
+
 // Instantiate the Button itself.
-        final TextButton button = new TextButton("   Submit    ", style);
+        final TextButton button = new TextButton(labels[0], style);
         button.center().center();
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
@@ -118,7 +129,7 @@ public class RegistrationStage {
         labelStyle.font = font;
         labelStyle.fontColor = Color.BLACK;
 
-        final Label loginL = new Label("Login:", labelStyle);
+        final Label loginL = new Label(labels[1], labelStyle);
         table.add(loginL);
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
@@ -128,17 +139,17 @@ public class RegistrationStage {
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.selection = tButton;
 
-        final TextField loginT = new TextField("", textFieldStyle);
+        final TextField loginT = new TextField(labels[2], textFieldStyle);
         table.add(loginT);
         table.row();
 
-        final Label emailL = new Label("Enter email:", labelStyle);
+        final Label emailL = new Label(labels[3], labelStyle);
         table.add(emailL);
         final TextField emailT = new TextField("", textFieldStyle);
         table.add(emailT);
         table.row();
 
-        final Label passwordL = new Label("Enter pass:", labelStyle);
+        final Label passwordL = new Label(labels[4], labelStyle);
         table.add(passwordL);
 
         final TextField passwordT = new TextField("",textFieldStyle);
@@ -147,7 +158,7 @@ public class RegistrationStage {
 
         table.add(passwordT);
         table.row();
-        final Label passwordL1 = new Label("Re enter pass:", labelStyle);
+        final Label passwordL1 = new Label(labels[5], labelStyle);
         table.add(passwordL1);
 
         final TextField passwordT1 = new TextField("",textFieldStyle);

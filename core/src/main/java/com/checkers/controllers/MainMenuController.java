@@ -1,9 +1,6 @@
 package com.checkers.controllers;
 
-import com.checkers.model.MainMenuObj;
-
 public class MainMenuController {
-	static MainMenuObj obj;
 	
 	public void MainMenuController(){
 		//renderer = new MainMenuRenderer(true);

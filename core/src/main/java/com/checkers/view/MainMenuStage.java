@@ -64,6 +64,7 @@ public class MainMenuStage {
         NinePatchDrawable tButton = new NinePatchDrawable(patchTButton);
 
         Table table = new Table();
+        table.setWidth(Gdx.graphics.getWidth() / 2);
         table.setFillParent(true);
         table.center().center();
         table.setBackground(background);
@@ -84,13 +85,22 @@ public class MainMenuStage {
         style.fontColor = Color.BLACK;
         style.up = tButton;
 
-
 // Instantiate the Button itself.
         final TextButton newGame = new TextButton("New game", style);
         final TextButton retGame = new TextButton("Return in game", style);
         final TextButton connGame = new TextButton("Connect to game", style);
         final TextButton exitGame = new TextButton("Exit", style);
         final TextButton logOut = new TextButton("Log out", style);
+        newGame.pad(0 ,15 ,0 ,15);
+        retGame.pad(0 ,15 ,0 ,15);
+        connGame.pad(0 ,15 ,0 ,15);
+        exitGame.pad(0 ,15 ,0 ,15);
+        logOut.pad(0 ,15 ,0 ,15);
+
+        exitGame.setWidth(connGame.getWidth());
+        newGame.setWidth(connGame.getWidth());
+        retGame.setWidth(connGame.getWidth());
+        logOut.setWidth(connGame.getWidth());
 
         table.add(newGame);
         table.row();

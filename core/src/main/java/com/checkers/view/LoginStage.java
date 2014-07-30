@@ -67,6 +67,7 @@ public class LoginStage {
 
         Table table = new Table();
         table.setFillParent(true);
+        table.setWidth(Gdx.graphics.getWidth() / 2);
         table.setBackground(background);
         table.center().center();
 
@@ -90,10 +91,23 @@ public class LoginStage {
         style.up = tButton;
 
 // Instantiate the Button itself.
-        final TextButton button = new TextButton("Submit", style);
+        String[] labels;
+        System.out.println("locale:"+java.util.Locale.getDefault().toString());
+        if(!java.util.Locale.getDefault().toString().equalsIgnoreCase("ru_RU")){
+            String[] tmp = {"Submit","Registration","Login:","Password:"};
+            labels = tmp;
+        }else{
+            String[] tmp = {"Подтвердить","Регистрация","Логин:","Пароль:"};
+            labels =  tmp;
+        }
+
+        //final TextButton button = new TextButton("Submit", style);
+        final TextButton button = new TextButton(labels[0], style);
         button.center().center();
         button.setWidth(Gdx.graphics.getWidth() / 3);
-        final TextButton buttonReg = new TextButton("Registration", style);
+        //final TextButton buttonReg = new TextButton("Registration", style);
+        final TextButton buttonReg = new TextButton(labels[1], style);
+
         buttonReg.center().center();
         buttonReg.setWidth(Gdx.graphics.getWidth() / 3);
 
@@ -102,7 +116,8 @@ public class LoginStage {
         labelStyle.font = font;
         labelStyle.fontColor = Color.BLACK;
 
-        final Label loginL = new Label("Login:", labelStyle);
+        //final Label loginL = new Label("Login:", labelStyle);
+        final Label loginL = new Label(labels[2], labelStyle);
         table.add(loginL);
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
@@ -118,7 +133,8 @@ public class LoginStage {
 
         table.row();
 
-        final Label passwordL = new Label("Password:", labelStyle);
+        //final Label passwordL = new Label("Password:", labelStyle);
+        final Label passwordL = new Label(labels[3], labelStyle);
         passwordL.setWidth(Gdx.graphics.getWidth()/3);
         table.add(passwordL);
 
