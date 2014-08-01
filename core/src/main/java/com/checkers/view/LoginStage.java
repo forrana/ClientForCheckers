@@ -21,6 +21,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.checkers.network.client.NetworkClient;
 import com.checkers.support.fonts.FontGenerator;
+import com.checkers.support.locale.Localization;
+
+import java.util.Map;
 
 
 public class LoginStage {
@@ -42,7 +45,6 @@ public class LoginStage {
     }
 
     public void create () {
-
         batch = new SpriteBatch();
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -92,6 +94,10 @@ public class LoginStage {
 
 // Instantiate the Button itself.
         String[] labels;
+        Localization localization = new Localization();
+        Map<String, String> fields = Localization.getFields();
+        System.out.println("fields:"+fields.get("Submit"));
+        System.out.println("fields:"+fields.get("Registration"));
         System.out.println("locale:"+java.util.Locale.getDefault().toString());
         if(!java.util.Locale.getDefault().toString().equalsIgnoreCase("ru_RU")){
             String[] tmp = {"Submit","Registration","Login:","Password:"};
@@ -102,11 +108,11 @@ public class LoginStage {
         }
 
         //final TextButton button = new TextButton("Submit", style);
-        final TextButton button = new TextButton(labels[0], style);
+        final TextButton button = new TextButton(fields.get("Submit"), style);
         button.center().center();
         button.setWidth(Gdx.graphics.getWidth() / 3);
         //final TextButton buttonReg = new TextButton("Registration", style);
-        final TextButton buttonReg = new TextButton(labels[1], style);
+        final TextButton buttonReg = new TextButton(fields.get("Registration"), style);
 
         buttonReg.center().center();
         buttonReg.setWidth(Gdx.graphics.getWidth() / 3);
@@ -117,7 +123,7 @@ public class LoginStage {
         labelStyle.fontColor = Color.BLACK;
 
         //final Label loginL = new Label("Login:", labelStyle);
-        final Label loginL = new Label(labels[2], labelStyle);
+        final Label loginL = new Label(fields.get("Login:"), labelStyle);
         table.add(loginL);
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
@@ -134,7 +140,7 @@ public class LoginStage {
         table.row();
 
         //final Label passwordL = new Label("Password:", labelStyle);
-        final Label passwordL = new Label(labels[3], labelStyle);
+        final Label passwordL = new Label(fields.get("Password:"), labelStyle);
         passwordL.setWidth(Gdx.graphics.getWidth()/3);
         table.add(passwordL);
 

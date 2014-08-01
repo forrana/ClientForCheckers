@@ -35,6 +35,7 @@ public class BoardController {
 	private boolean isExec = true;
 	private Board board;
 
+
 	public BoardController(Board inpBoard, MoveValidator inpValidator, CheckersClient inputClient){
 		this.validator = inpValidator;
         thisClient = inputClient;

@@ -1,0 +1,18 @@
+{
+ "LoginPage":
+                {
+                    "Submit"        : "Подтвердить",
+                    "Registration"  : "Регистрация",
+                    "Login:"        : "Логин:",
+                    "Password:"     : "Пароль:"
+                },
+ "MainMenuPage":
+                {
+                    "New game"  : "Создать",
+                    "Return"    : "Загрузить",
+                    "Connect"   : "Присоедениться",
+                    "Log out"   : "Отключиться",
+                    "Exit"      : "Выход"
+                }
+}
+
