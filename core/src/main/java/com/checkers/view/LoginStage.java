@@ -92,62 +92,44 @@ public class LoginStage {
         style.fontColor = Color.BLACK;
         style.up = tButton;
 
-// Instantiate the Button itself.
-        String[] labels;
-        Localization localization = new Localization();
-        Map<String, String> fields = Localization.getFields();
-        System.out.println("fields:"+fields.get("Submit"));
-        System.out.println("fields:"+fields.get("Registration"));
-        System.out.println("locale:"+java.util.Locale.getDefault().toString());
-        if(!java.util.Locale.getDefault().toString().equalsIgnoreCase("ru_RU")){
-            String[] tmp = {"Submit","Registration","Login:","Password:"};
-            labels = tmp;
-        }else{
-            String[] tmp = {"Подтвердить","Регистрация","Логин:","Пароль:"};
-            labels =  tmp;
-        }
-
-        //final TextButton button = new TextButton("Submit", style);
-        final TextButton button = new TextButton(fields.get("Submit"), style);
-        button.center().center();
-        button.setWidth(Gdx.graphics.getWidth() / 3);
-        //final TextButton buttonReg = new TextButton("Registration", style);
-        final TextButton buttonReg = new TextButton(fields.get("Registration"), style);
-
-        buttonReg.center().center();
-        buttonReg.setWidth(Gdx.graphics.getWidth() / 3);
-
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.background = background;
         labelStyle.font = font;
         labelStyle.fontColor = Color.BLACK;
 
-        //final Label loginL = new Label("Login:", labelStyle);
-        final Label loginL = new Label(fields.get("Login:"), labelStyle);
-        table.add(loginL);
-
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.background = tEdit;
-
         textFieldStyle.font = font;
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.selection = tButton;
 
+// Instantiate the Button itself.
+        String[] labels;
+        Localization localization = new Localization(java.util.Locale.getDefault().toString());
+        Map<String, String> fields = Localization.getFields("LoginPage");
+        System.out.println("locale:"+java.util.Locale.getDefault().toString());
+
+        final TextButton button = new TextButton(fields.get("Submit"), style);
+        final TextButton buttonReg = new TextButton(fields.get("Registration"), style);
+        final Label loginL = new Label(fields.get("Login:"), labelStyle);
         final TextField loginT = new TextField("", textFieldStyle);
-        loginT.setWidth(Gdx.graphics.getWidth()/3);
-        table.add(loginT);
-
-        table.row();
-
-        //final Label passwordL = new Label("Password:", labelStyle);
         final Label passwordL = new Label(fields.get("Password:"), labelStyle);
-        passwordL.setWidth(Gdx.graphics.getWidth()/3);
-        table.add(passwordL);
-
         final TextField passwordT = new TextField("",textFieldStyle);
+
+        button.center().center();
+        button.setWidth(Gdx.graphics.getWidth() / 3);
+        buttonReg.center().center();
+        buttonReg.setWidth(Gdx.graphics.getWidth() / 3);
+
+        loginT.setWidth(Gdx.graphics.getWidth()/3);
+        passwordL.setWidth(Gdx.graphics.getWidth()/3);
         passwordT.setPasswordMode(true);
         passwordT.setPasswordCharacter('*');
 
+        table.add(loginL);
+        table.add(loginT);
+        table.row();
+        table.add(passwordL);
         table.add(passwordT);
         table.row();
         table.add();

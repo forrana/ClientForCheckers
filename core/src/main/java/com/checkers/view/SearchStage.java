@@ -181,10 +181,10 @@ public class SearchStage {
      //   gBoardT.setMaxLength(10);
         tableFilter2.add(gBoardT);
 
-        final Label gCreaterL = new Label("Creater", labelStyle);
+        final Label gCreaterL = new Label("Creator", labelStyle);
         tableFilter2.add(gCreaterL);
 
-        final TextField gCreaterT = new TextField("creater", textFieldStyle);
+        final TextField gCreaterT = new TextField("creator", textFieldStyle);
       //  gCreaterT.setMaxLength(10);
 
         tableFilter2.add(gCreaterT);
@@ -266,7 +266,7 @@ public class SearchStage {
         tableGameDetail.row();
 
         final TextButton buttonBack = new TextButton("<- Back", style);
-        final TextButton buttonConnect = new TextButton("*******CONNECT********", style);
+        final TextButton buttonConnect = new TextButton("CONNECT", style);
         buttonConnect.center().center();
 
         tableGameDetail.add();

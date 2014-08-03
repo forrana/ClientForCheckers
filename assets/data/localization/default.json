@@ -1,0 +1,69 @@
+{
+ "LoginPage":
+                {
+                    "Submit"        : "Submit",
+                    "Registration"  : "Registration",
+                    "Login:"        : "Login:",
+                    "Password:"     : "Password:"
+                },
+ "MainMenuPage":
+                {
+                    "New game"  : "New game",
+                    "Return"    : "Return",
+                    "Connect"   : "Connect",
+                    "Log out"   : "Log out",
+                    "Exit"      : "Exit"
+                },
+ "RegStage":    {
+                    "Submit"                : "Submit",
+                    "Login:"                : "Login:",
+                    "Email:"                : "Email:",
+                    "Password:"             : "Password:",
+                    "Re enter pass:"        : "Re enter pass:",
+                    "Pass no match!"        : "Pass no match!",
+                    "Fill fields please!"   : "Fill fields please!"
+                },
+ "NewGameStage":{
+                    "Game name"         : "Game name",
+                    "Game type"         : "Game type",
+                    "Board type"        : "Board type",
+                    "Game description"  : "Game description",
+                    "Create game"       : "Create game",
+                    "<- Back"           : "<- Back"
+                },
+ "SearchGameStage":{
+                        "Search game:"  : "Search game:",
+                        "Game name"     : "Game name",
+                        "name"          : "name",
+                        "Game type"     : "Game type",
+                        "type"          : "type",
+                        "Board type"    : "Board type",
+                        "8x8"           : "8х8",
+                        "Creator"       : "Creator",
+                        "creator"       : "creator",
+                        "Game list"     : "Game list",
+                        "Game detail"   : "Game detail",
+                        "Game name"     : "Game name",
+                        "Game type"     : "Game type",
+                        "Board type"    : "Board type",
+                        "Creator1"      : "Creator",
+                        "Description"   : "Description",
+                        "<- Back"       : "<- Back",
+                        "CONNECT"       : "CONNECT"
+                   },
+ "WaitingStage":    {
+                        "Exit"                  : "Exit",
+                        "Main menu"             : "Main menu",
+                        "Searching opponent..." : "Searching opponent..."
+                    },
+ "InGameMenuStage":     {
+                            "Exit"                  : "Exit",
+                            "Main menu"             : "Main menu",
+                            "Return"                : "Return"
+                        },
+ "EndGameMenuStage":    {
+                            "Exit"                  : "Exit",
+                            "Main menu"             : "Main menu"
+                        }
+}
+

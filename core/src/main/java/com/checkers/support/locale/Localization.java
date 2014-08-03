@@ -5,6 +5,7 @@ import com.checkers.server.beans.User;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
@@ -13,18 +14,23 @@ import java.util.Map;
  */
 public class Localization {
     private static Map<String,Map<String,String>> fields;
-    public Localization(){
+    public Localization(String locale){
         ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+        File file;
+           file = new File("../assets/data/localization/"+locale+".json");
+        if(!file.exists())
+           file = new File("../assets/data/localization/default.json");
         try {
-            fields = mapper.readValue(new File("../assets/data/localization/login_stage_rus.json"), Map.class);
+            fields = mapper.readValue(file, Map.class);
         } catch (IOException e) {
+
             e.printStackTrace();
         }
     }
 
-    public static Map<String,String> getFields(){
+    public static Map<String,String> getFields(String page){
 
-        return fields.get("LoginPage");
+        return fields.get(page);
     }
 
 

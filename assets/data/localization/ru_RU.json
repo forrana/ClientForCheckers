@@ -1,0 +1,69 @@
+{
+ "LoginPage":
+                {
+                    "Submit"        : "Подтвердить",
+                    "Registration"  : "Регистрация",
+                    "Login:"        : "Логин:",
+                    "Password:"     : "Пароль:"
+                },
+ "MainMenuPage":
+                {
+                    "New game"  : "Создать",
+                    "Return"    : "Загрузить",
+                    "Connect"   : "Присоедениться",
+                    "Log out"   : "Отключиться",
+                    "Exit"      : "Выход"
+                },
+ "RegStage":    {
+                    "Submit"                : "Отправить",
+                    "Login:"                : "Логин:",
+                    "Email:"                : "Email:",
+                    "Password:"             : "Пароль:",
+                    "Re enter pass:"        : "Повторите пароль:",
+                    "Pass no match!"        : "Пароли не совпадают!",
+                    "Fill fields please!"   : "Заполните все поля, пожалуйста!"
+                },
+ "NewGameStage":{
+                    "Game name"         : "Название игры",
+                    "Game type"         : "Тип игры",
+                    "Board type"        : "Тип доски",
+                    "Game description"  : "Описание игры",
+                    "Create game"       : "Создать",
+                    "<- Back"           : "<- Вернуться"
+                },
+ "SearchGameStage":{
+                        "Search game:"  : "поиск",
+                        "Game name"     : "Название игры",
+                        "name"          : "название",
+                        "Game type"     : "Тип игры",
+                        "type"          : "тип",
+                        "Board type"    : "Тип доски",
+                        "8x8"           : "8х8",
+                        "Creator"       : "Создатель",
+                        "creator"       : "создатель",
+                        "Game list"     : "Список игр",
+                        "Game detail"   : "Детали",
+                        "Game name"     : "Имя игры",
+                        "Game type"     : "Тип игры",
+                        "Board type"    : "Тип доски",
+                        "Creator1"      : "Создатель",
+                        "Description"   : "Описание",
+                        "<- Back"       : "<- Вернуться",
+                        "CONNECT"       : "ПОДКЛЮЧИТЬСЯ"
+                   },
+ "WaitingStage":    {
+                        "Exit"                  : "Выйти",
+                        "Main menu"             : "Главное меню",
+                        "Searching opponent..." : "Поиск оппонента..."
+                    },
+ "InGameMenuStage":     {
+                            "Exit"                  : "Выход",
+                            "Main menu"             : "Главное меню",
+                            "Return"                : "к игре"
+                        },
+ "EndGameMenuStage":    {
+                            "Exit"                  : "Выход",
+                            "Main menu"             : "Главное меню"
+                        }
+}
+
