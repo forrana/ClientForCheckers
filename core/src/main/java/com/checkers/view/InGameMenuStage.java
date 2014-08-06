@@ -18,6 +18,9 @@ package com.checkers.view;
         import com.badlogic.gdx.utils.viewport.StretchViewport;
         import com.checkers.network.client.NetworkClient;
         import com.checkers.support.fonts.FontGenerator;
+        import com.checkers.support.locale.Localization;
+
+        import java.util.Map;
 
 
 public class InGameMenuStage {
@@ -87,14 +90,6 @@ public class InGameMenuStage {
         style.fontColor = Color.BLACK;
         style.up = tButton;
 
-// Instantiate the Button itself.
-        final TextButton exitButton = new TextButton("Exit", style);
-        exitButton.center().center();
-        final TextButton mainMenuButton = new TextButton("Main menu", style);
-        mainMenuButton.center().center();
-        final TextButton returnButton = new TextButton("Return", style);
-        returnButton.center().center();
-
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.background = background;
         labelStyle.font = font;
@@ -106,6 +101,15 @@ public class InGameMenuStage {
         textFieldStyle.font = font;
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.selection = tButton;
+// Instantiate the Button itself.
+        Map<String, String> fields = Localization.getFields("InGameMenuPage");
+
+        final TextButton exitButton = new TextButton(fields.get("Exit"), style);
+        //exitButton.center().center();
+        final TextButton mainMenuButton = new TextButton(fields.get("Main menu"), style);
+        //mainMenuButton.center().center();
+        final TextButton returnButton = new TextButton(fields.get("Return"), style);
+        returnButton.center().center();
 
         table.add(returnButton);
         table.row();
@@ -115,9 +119,10 @@ public class InGameMenuStage {
 
         exitButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                dispose();
+                Gdx.app.exit();
             }
         });
+
         mainMenuButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
                 NetworkClient.gameH.game = null;

@@ -19,7 +19,9 @@ package com.checkers.view;
         import com.checkers.network.client.GameListener;
         import com.checkers.network.client.NetworkClient;
         import com.checkers.support.fonts.FontGenerator;
+        import com.checkers.support.locale.Localization;
 
+        import java.util.Map;
         import java.util.concurrent.ExecutorService;
         import java.util.concurrent.Executors;
 
@@ -96,26 +98,25 @@ public class WaitingStage {
         style.fontColor = Color.BLACK;
         style.up = tButton;
 
-// Instantiate the Button itself.
-        final TextButton exitButton = new TextButton("Exit", style);
-        exitButton.center().center();
-        final TextButton mainMenuButton = new TextButton("Main menu", style);
-        mainMenuButton.center().center();
-
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.background = background;
         labelStyle.font = font;
         labelStyle.fontColor = Color.BLACK;
 
-
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.background = tEdit;
-
         textFieldStyle.font = font;
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.selection = tButton;
 
-        final Label endMessage = new Label("Searching opponent...", labelStyle);
+        Map<String, String> fields = Localization.getFields("WaitingPage");
+
+        final TextButton exitButton = new TextButton(fields.get("Exit"), style);
+        //exitButton.center().center();
+        final TextButton mainMenuButton = new TextButton(fields.get("Main menu"), style);
+        //mainMenuButton.center().center();
+        final Label endMessage = new Label(fields.get("Searching opponent..."), labelStyle);
+
         table.add(endMessage);
         table.row();
         table.row();

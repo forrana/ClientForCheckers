@@ -18,6 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.checkers.support.fonts.FontGenerator;
+import com.checkers.support.locale.Localization;
+
+import java.util.Map;
 
 
 /**
@@ -70,7 +73,7 @@ public class MainMenuStage {
         table.setBackground(background);
         stage.addActor(table);
 
-        FontGenerator fontGenerator = new FontGenerator(26);
+        FontGenerator fontGenerator = new FontGenerator(26f);
         BitmapFont font = fontGenerator.getFont();
 
         // Create a new TextButtonStyle
@@ -86,11 +89,13 @@ public class MainMenuStage {
         style.up = tButton;
 
 // Instantiate the Button itself.
-        final TextButton newGame = new TextButton("New game", style);
-        final TextButton retGame = new TextButton("Return in game", style);
-        final TextButton connGame = new TextButton("Connect to game", style);
-        final TextButton exitGame = new TextButton("Exit", style);
-        final TextButton logOut = new TextButton("Log out", style);
+        Map<String, String> fields = Localization.getFields("MainMenuPage");
+
+        final TextButton newGame = new TextButton(fields.get("Create"), style);
+        final TextButton retGame = new TextButton(fields.get("Return"), style);
+        final TextButton connGame = new TextButton(fields.get("Connect"), style);
+        final TextButton exitGame = new TextButton(fields.get("Exit"), style);
+        final TextButton logOut = new TextButton(fields.get("Log out"), style);
         newGame.pad(0 ,15 ,0 ,15);
         retGame.pad(0 ,15 ,0 ,15);
         connGame.pad(0 ,15 ,0 ,15);
@@ -143,8 +148,7 @@ public class MainMenuStage {
         exitGame.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
 
-                dispose();
-
+                Gdx.app.exit();
             }
         });
     }
@@ -163,6 +167,5 @@ public class MainMenuStage {
 
     public void dispose() {
         stage.dispose();
-        skin.dispose();
     }
 }

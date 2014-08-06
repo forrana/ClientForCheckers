@@ -16,6 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.checkers.network.client.NetworkClient;
 import com.checkers.support.fonts.FontGenerator;
+import com.checkers.support.locale.Localization;
+
+import java.util.Map;
 /*
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -121,52 +124,51 @@ public class RegistrationStage {
         }
 
 // Instantiate the Button itself.
-        final TextButton button = new TextButton(labels[0], style);
-        button.center().center();
 
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.background = background;
         labelStyle.font = font;
         labelStyle.fontColor = Color.BLACK;
 
-        final Label loginL = new Label(labels[1], labelStyle);
-        table.add(loginL);
-
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.background = tEdit;
-
         textFieldStyle.font = font;
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.selection = tButton;
 
-        final TextField loginT = new TextField(labels[2], textFieldStyle);
-        table.add(loginT);
-        table.row();
+        Map<String, String> fields = Localization.getFields("RegPage");
 
-        final Label emailL = new Label(labels[3], labelStyle);
-        table.add(emailL);
+        final TextButton buttonBack = new TextButton(fields.get("<- Back"), style);
+        final TextButton button = new TextButton(fields.get("Submit"), style);
+        final Label loginL = new Label(fields.get("Login:"), labelStyle);
+        final TextField loginT = new TextField("", textFieldStyle);
+        final Label emailL = new Label(fields.get("Email:"), labelStyle);
         final TextField emailT = new TextField("", textFieldStyle);
-        table.add(emailT);
-        table.row();
-
-        final Label passwordL = new Label(labels[4], labelStyle);
-        table.add(passwordL);
-
+        final Label passwordL = new Label(fields.get("Password:"), labelStyle);
         final TextField passwordT = new TextField("",textFieldStyle);
+        final Label passwordL1 = new Label(fields.get("Re enter pass:"), labelStyle);
+        final TextField passwordT1 = new TextField("",textFieldStyle);
+
         passwordT.setPasswordMode(true);
         passwordT.setPasswordCharacter('*');
-
-        table.add(passwordT);
-        table.row();
-        final Label passwordL1 = new Label(labels[5], labelStyle);
-        table.add(passwordL1);
-
-        final TextField passwordT1 = new TextField("",textFieldStyle);
         passwordT1.setPasswordMode(true);
         passwordT1.setPasswordCharacter('*');
+
+        table.add(buttonBack);
+        table.row();
+        table.row();
+        table.add(loginL);
+        table.add(loginT);
+        table.row();
+        table.add(emailL);
+        table.add(emailT);
+        table.row();
+        table.add(passwordL);
+        table.add(passwordT);
+        table.row();
+        table.add(passwordL1);
         table.add(passwordT1);
         table.row();
-
         table.add();
         table.add(button);
 
@@ -178,12 +180,19 @@ public class RegistrationStage {
                 if(!loginT.getText().isEmpty() && !passwordT.getText().isEmpty() && !emailT.getText().isEmpty()){
             //        NetworkClient.auth(loginT.getText(), passwordT.getText());
                     NetworkClient.createNewUser(loginT.getText(),passwordT.getText(), emailT.getText());
-                }else System.out.println("Fill fields please!");
+                    thisClient.setScreen(thisClient.login);
+                }else System.out.println(Localization.getFields("RegPage").get("Fill fields please!"));
                 }else{
-                    System.out.println("Pass no match!");
+                    System.out.println(Localization.getFields("RegPage").get("Pass no match!"));
                     passwordT.setText("");
                     passwordT1.setText("");
                 }
+            }
+        });
+
+        buttonBack.addListener(new ChangeListener() {
+            public void changed(ChangeEvent event, Actor actor) {
+                thisClient.setScreen(thisClient.login);
             }
         });
     }

@@ -8,13 +8,14 @@
                 },
  "MainMenuPage":
                 {
-                    "New game"  : "New game",
+                    "Create"    : "Create",
                     "Return"    : "Return",
                     "Connect"   : "Connect",
                     "Log out"   : "Log out",
                     "Exit"      : "Exit"
                 },
- "RegStage":    {
+ "RegPage":    {
+                    "<- Back"               : "<- Back",
                     "Submit"                : "Submit",
                     "Login:"                : "Login:",
                     "Email:"                : "Email:",
@@ -23,7 +24,7 @@
                     "Pass no match!"        : "Pass no match!",
                     "Fill fields please!"   : "Fill fields please!"
                 },
- "NewGameStage":{
+ "NewGamePage":{
                     "Game name"         : "Game name",
                     "Game type"         : "Game type",
                     "Board type"        : "Board type",
@@ -31,7 +32,7 @@
                     "Create game"       : "Create game",
                     "<- Back"           : "<- Back"
                 },
- "SearchGameStage":{
+ "SearchPage":{
                         "Search game:"  : "Search game:",
                         "Game name"     : "Game name",
                         "name"          : "name",
@@ -51,17 +52,17 @@
                         "<- Back"       : "<- Back",
                         "CONNECT"       : "CONNECT"
                    },
- "WaitingStage":    {
+ "WaitingPage":    {
                         "Exit"                  : "Exit",
                         "Main menu"             : "Main menu",
                         "Searching opponent..." : "Searching opponent..."
                     },
- "InGameMenuStage":     {
+ "InGameMenuPage":     {
                             "Exit"                  : "Exit",
                             "Main menu"             : "Main menu",
                             "Return"                : "Return"
                         },
- "EndGameMenuStage":    {
+ "EndGamePage":    {
                             "Exit"                  : "Exit",
                             "Main menu"             : "Main menu"
                         }

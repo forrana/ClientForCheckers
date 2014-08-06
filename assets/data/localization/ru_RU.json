@@ -8,13 +8,14 @@
                 },
  "MainMenuPage":
                 {
-                    "New game"  : "Создать",
+                    "Create"    : "Создать",
                     "Return"    : "Загрузить",
                     "Connect"   : "Присоедениться",
                     "Log out"   : "Отключиться",
                     "Exit"      : "Выход"
                 },
- "RegStage":    {
+ "RegPage":    {
+                    "<- Back"               : "<- Назад",
                     "Submit"                : "Отправить",
                     "Login:"                : "Логин:",
                     "Email:"                : "Email:",
@@ -23,7 +24,7 @@
                     "Pass no match!"        : "Пароли не совпадают!",
                     "Fill fields please!"   : "Заполните все поля, пожалуйста!"
                 },
- "NewGameStage":{
+ "NewGamePage":{
                     "Game name"         : "Название игры",
                     "Game type"         : "Тип игры",
                     "Board type"        : "Тип доски",
@@ -31,7 +32,7 @@
                     "Create game"       : "Создать",
                     "<- Back"           : "<- Вернуться"
                 },
- "SearchGameStage":{
+ "SearchPage":{
                         "Search game:"  : "поиск",
                         "Game name"     : "Название игры",
                         "name"          : "название",
@@ -51,17 +52,17 @@
                         "<- Back"       : "<- Вернуться",
                         "CONNECT"       : "ПОДКЛЮЧИТЬСЯ"
                    },
- "WaitingStage":    {
+ "WaitingPage":    {
                         "Exit"                  : "Выйти",
                         "Main menu"             : "Главное меню",
                         "Searching opponent..." : "Поиск оппонента..."
                     },
- "InGameMenuStage":     {
+ "InGameMenuPage":     {
                             "Exit"                  : "Выход",
                             "Main menu"             : "Главное меню",
                             "Return"                : "к игре"
                         },
- "EndGameMenuStage":    {
+ "EndGamePage":    {
                             "Exit"                  : "Выход",
                             "Main menu"             : "Главное меню"
                         }

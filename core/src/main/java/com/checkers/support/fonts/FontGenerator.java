@@ -18,18 +18,18 @@ public class FontGenerator {
     public FontGenerator(){
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/font/font.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        float size = 1;
-        parameter.size = Gdx.graphics.getHeight() / (int)(18*size);
+        float size = 0.18f;
+        parameter.size = Gdx.graphics.getHeight() / (int)(100*size);
         parameter.characters = FONT_CHARACTERS;
         font = generator.generateFont(parameter);
         generator.dispose();
     }
 
-    public FontGenerator(int size){
+    public FontGenerator(float size){
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("data/font/font.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         size = 32/size;
-        parameter.size = Gdx.graphics.getHeight() / (18*size);
+        parameter.size = Gdx.graphics.getHeight() / (int)(18*size);
         parameter.characters = FONT_CHARACTERS;
         font = generator.generateFont(parameter);
         generator.dispose();

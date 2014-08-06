@@ -19,6 +19,9 @@ package com.checkers.view;
         import com.badlogic.gdx.utils.viewport.StretchViewport;
         import com.checkers.network.client.NetworkClient;
         import com.checkers.support.fonts.FontGenerator;
+        import com.checkers.support.locale.Localization;
+
+        import java.util.Map;
 
 
 public class EndGameStage {
@@ -75,7 +78,7 @@ public class EndGameStage {
 
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), greenC,background);
 
-        FontGenerator fontGenerator = new FontGenerator(32);
+        FontGenerator fontGenerator = new FontGenerator(32f);
         BitmapFont font = fontGenerator.getFont();
 
 
@@ -89,12 +92,6 @@ public class EndGameStage {
         style.fontColor = Color.BLACK;
         style.up = tButton;
 
-// Instantiate the Button itself.
-        final TextButton exitButton = new TextButton("Exit", style);
-        exitButton.center().center();
-        final TextButton mainMenuButton = new TextButton("Main menu", style);
-        mainMenuButton.center().center();
-
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.background = background;
         labelStyle.font = font;
@@ -107,8 +104,15 @@ public class EndGameStage {
         textFieldStyle.font = font;
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.selection = tButton;
+// Instantiate the Button itself.
+        Map<String, String> fields = Localization.getFields("EndGamePage");
 
+        final TextButton exitButton = new TextButton(fields.get("Exit"), style);
+        //exitButton.center().center();
+        final TextButton mainMenuButton = new TextButton(fields.get("Main menu"), style);
+        //mainMenuButton.center().center();
         final Label endMessage = new Label(this.endMessage, labelStyle);
+
         table.add(endMessage);
         table.row();
         table.row();

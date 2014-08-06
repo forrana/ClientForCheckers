@@ -18,9 +18,11 @@ import com.checkers.network.client.GameListener;
 import com.checkers.network.client.NetworkClient;
 import com.checkers.server.beans.Game;
 import com.checkers.support.fonts.FontGenerator;
+import com.checkers.support.locale.Localization;
 //import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -79,7 +81,7 @@ public class NewGameStage {
         Color blueC = new Color(1f,0f,0f,1f);
 
         Window.WindowStyle windowStyle = new Window.WindowStyle(new BitmapFont(), greenC,draw);
-        FontGenerator fontGenerator = new FontGenerator(32);
+        FontGenerator fontGenerator = new FontGenerator(32f);
         BitmapFont font = fontGenerator.getFont();
 
 
@@ -105,22 +107,19 @@ public class NewGameStage {
         textFieldStyle.font = font;
         textFieldStyle.fontColor = Color.LIGHT_GRAY;
         textFieldStyle.selection = tButton;
+        Map<String, String> fields = Localization.getFields("NewGamePage");
 
 
-        final Label lGameName = new Label("Game name", labelStyle);
+        final Label lGameName = new Label(fields.get("Game name"), labelStyle);
         final TextField tGameName = new TextField("", textFieldStyle);
-
-        final Label lGameType = new Label("Game type", labelStyle);
+        final Label lGameType = new Label(fields.get("Game type"), labelStyle);
         final TextField tGameType = new TextField("", textFieldStyle);
-
-        final Label lBoardType = new Label("Board type", labelStyle);
+        final Label lBoardType = new Label(fields.get("Board type"), labelStyle);
         final TextField tBoardType = new TextField("", textFieldStyle);
-
-        final Label lGameDescription = new Label("Game description", labelStyle);
+        final Label lGameDescription = new Label(fields.get("Game description"), labelStyle);
         final TextField tGameDescription = new TextField("", textFieldStyle);
-
-        final TextButton bCreate = new TextButton("Create game", style);
-        final TextButton bBack = new TextButton("<- Back", style);
+        final TextButton bCreate = new TextButton(fields.get("Create game"), style);
+        final TextButton bBack = new TextButton(fields.get("<- Back"), style);
 
   //*******************Filing table
         table.add();

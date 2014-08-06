@@ -25,8 +25,10 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.checkers.network.client.NetworkClient;
 import com.checkers.server.beans.Game;
 import com.checkers.support.fonts.FontGenerator;
+import com.checkers.support.locale.Localization;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class SearchStage {
@@ -35,13 +37,10 @@ public class SearchStage {
     CheckersClient thisClient = new CheckersClient();
 
     public SearchStage(CheckersClient inpClient, NetworkClient inetworkClient){
-  //      networkClient = inetworkClient;
         thisClient = inpClient;
         create ();
     }
 
-    private String[] listEntries = new String[]{"This is a list entry", "And another one", "The meaning of life", "Is hard to come by"
-           };
     private ArrayList<String> gamesList = new ArrayList<String>();
 
     public Stage stage;
@@ -101,7 +100,7 @@ public class SearchStage {
         Color redC = new Color(1f,0f,0f,1f);
         Color greenC = new Color(1f,0f,0f,1f);
         Color blueC = new Color(1f,0f,0f,1f);
-        FontGenerator fontGenerator = new FontGenerator();
+        FontGenerator fontGenerator = new FontGenerator(22f);
         BitmapFont font = fontGenerator.getFont();
 
 
@@ -140,83 +139,72 @@ public class SearchStage {
         scrollPaneStyle.vScrollKnob = tEdit;
         scrollPaneStyle.corner = tEdit;
 
-// Instantiate the Button itself.
-        final Label topLabel = new Label("Search game:", labelStyle);
+        Map<String, String> fields = Localization.getFields("SearchPage");
 
+// Instantiate the Button itself.
+//Main page
+        final Label topLabel = new Label(fields.get("Search game:"), labelStyle);
+        final Label gNameL = new Label(fields.get("Game name"), labelStyle);
+        final TextField gNameT = new TextField(fields.get("name"), textFieldStyle);
+        final Label gTypeL = new Label(fields.get("Game type"), labelStyle);
+        final TextField gTypeT = new TextField(fields.get("type"), textFieldStyle);
         //**************Game Filter section
+//Description
+        final Label gBoardL = new Label(fields.get("Board type"), labelStyle);
+        final TextField gBoardT = new TextField(fields.get("8x8"), textFieldStyle);
+        final Label gCreaterL = new Label(fields.get("Creator"), labelStyle);
+        final TextField gCreaterT = new TextField(fields.get("creator"), textFieldStyle);
 
         Table tableFilter1 = new Table();
-      //  tableFilter.setFillParent(true);
-     //   tableFilter.set
         tableFilter1.setBackground(tButton);
-     //   tableFilter.left().top();
-
-      //  final Label filtrLabel = new Label("Filter:", labelStyle);
-      //  tableFilter1.add(filtrLabel);
-       // tableFilter1.row();
-
-        final Label gNameL = new Label("Game name", labelStyle);
         tableFilter1.add(gNameL);
-
-        final TextField gNameT = new TextField("name", textFieldStyle);
-     //   gNameT.setMaxLength(10);
         tableFilter1.add(gNameT);
-
-        final Label gTypeL = new Label("Game type", labelStyle);
         tableFilter1.add(gTypeL);
-
-        final TextField gTypeT = new TextField("type", textFieldStyle);
      //   gTypeT.setMaxLength(10);
         tableFilter1.add(gTypeT);
-
         Table tableFilter2 = new Table();
         tableFilter2.setBackground(tButton);
-
      //   tableFilter2.row();
-
-        final Label gBoardL = new Label("Board type", labelStyle);
         tableFilter2.add(gBoardL);
-
-        final TextField gBoardT = new TextField("8x8", textFieldStyle);
      //   gBoardT.setMaxLength(10);
         tableFilter2.add(gBoardT);
-
-        final Label gCreaterL = new Label("Creator", labelStyle);
         tableFilter2.add(gCreaterL);
-
-        final TextField gCreaterT = new TextField("creator", textFieldStyle);
       //  gCreaterT.setMaxLength(10);
-
         tableFilter2.add(gCreaterT);
 
         table.add(tableFilter1);
         table.row();
         table.add(tableFilter2);
         table.row();
-
-        //**************Game list section
         Table tableGameList = new Table();
      //   tableGameList.setFillParent(true);
      //   tableGameList.setBackground(tButton);
   //      tableGameList.left().bottom();
-
-        //List gameList = new List(listEntries, listStyle);
         for(String tttGame:gamesList){
-
             System.out.println(tttGame);
         }
-
-        System.out.println("size"+gamesList.size());
+    //Game list
+        final Label gameListL = new Label(fields.get("Game list"), labelStyle);
+        final Label lGameDetail = new Label(fields.get("Game detail"), labelStyle);
+        final Label lGameName = new Label(fields.get("Game name"), labelStyle);
+        final Label lGameType = new Label(fields.get("Game type"), labelStyle);
+        final Label lGameNameE = new Label(games.get(0).getName(), labelStyle);
+        final Label lGameTypeE = new Label(games.get(0).getType(), labelStyle);
+        final Label lBoardType = new Label(fields.get("Board type"), labelStyle);
+        final Label lBoardTypeE = new Label(games.get(0).getBoard(), labelStyle);
+        final Label lCreator = new Label(fields.get("Creator"), labelStyle);
+        final Label lCreatorE = new Label(games.get(0).getWhite().getFirstName() + ' ' +
+                games.get(0).getWhite().getLastName(), labelStyle);
+        final Label lDescription = new Label(fields.get("Description"), labelStyle);
+        final Label lDescriptionE = new Label(games.get(0).getDescription(), labelStyle);
+        final TextButton buttonBack = new TextButton(fields.get("<- Back"), style);
+        final TextButton buttonConnect = new TextButton(fields.get("CONNECT"), style);
 
         final List gameList;
-
         gameList = new List(listStyle);
-
         gameList.setItems(gamesList.toArray());
-
-
         ScrollPane gameListPane = new ScrollPane(gameList, scrollPaneStyle);
-        final Label gameListL = new Label("Game list", labelStyle);
+
         tableGameList.add(gameListL);
         tableGameList.row();
         tableGameList.add(gameListPane);
@@ -229,46 +217,31 @@ public class SearchStage {
       //  tableGameDetail.setBackground(tButton);
         tableGameDetail.right().bottom();
 
-        final Label lGameDetail = new Label("Game detail", labelStyle);
         tableGameDetail.add(lGameDetail);
        // tableGameDetail.setBackground(tButton);
         tableGameDetail.row();
 
-        final Label lGameName = new Label("Game name", labelStyle);
         tableGameDetail.add(lGameName);
-        final Label lGameNameE = new Label(games.get(0).getName(), labelStyle);
         tableGameDetail.add(lGameNameE);
         tableGameDetail.row();
 
-        final Label lGameType = new Label("Game type", labelStyle);
         tableGameDetail.add(lGameType);
-        final Label lGameTypeE = new Label(games.get(0).getType(), labelStyle);
         tableGameDetail.add(lGameTypeE);
         tableGameDetail.row();
 
-        final Label lBoardType = new Label("Board type", labelStyle);
         tableGameDetail.add(lBoardType);
-        final Label lBoardTypeE = new Label(games.get(0).getBoard(), labelStyle);
         tableGameDetail.add(lBoardTypeE);
         tableGameDetail.row();
 
-        final Label lCreator = new Label("Creator", labelStyle);
         tableGameDetail.add(lCreator);
-        final Label lCreatorE = new Label(games.get(0).getWhite().getFirstName() + ' ' +
-                                          games.get(0).getWhite().getLastName(), labelStyle);
         tableGameDetail.add(lCreatorE);
         tableGameDetail.row();
 
-        final Label lDescription = new Label("Description", labelStyle);
         tableGameDetail.add(lDescription);
-        final Label lDescriptionE = new Label(games.get(0).getDescription(), labelStyle);
         tableGameDetail.add(lDescriptionE);
         tableGameDetail.row();
 
-        final TextButton buttonBack = new TextButton("<- Back", style);
-        final TextButton buttonConnect = new TextButton("CONNECT", style);
         buttonConnect.center().center();
-
         tableGameDetail.add();
         tableGameDetail.add(buttonConnect);
 
@@ -280,26 +253,18 @@ public class SearchStage {
         table1.setBackground(background);
         table1.center().center();
         Table tabName = new Table();
-        //tabName.setBackground(tButton);
-
         tabName.add(gNameL);
         tabName.add(gNameT);
 
         Table tabGameT = new Table();
-       // tabGameT.setBackground(tButton);
-
         tabGameT.add(gTypeL);
         tabGameT.add(gTypeT);
 
         Table tabBoardT = new Table();
-       // tabBoardT.setBackground(tButton);
-
         tabBoardT.add(gBoardL);
         tabBoardT.add(gBoardT);
 
         Table tabCreater = new Table();
-        //tabCreater.setBackground(tButton);
-
         tabCreater.add(gCreaterL);
         tabCreater.add(gCreaterT);
 
@@ -314,8 +279,6 @@ public class SearchStage {
         table1.row();
         table1.add(tableGameList);
         table1.add(tableGameDetail);
-        //stage.addActor(tableFilter);
-        //stage.addActor(tableGameList);
 
         stage.addActor(table1);
 
