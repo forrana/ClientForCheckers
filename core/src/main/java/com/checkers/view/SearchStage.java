@@ -51,14 +51,22 @@ public class SearchStage {
     public void create () {
 
         final ArrayList<Game> games =  networkClient.getAllGames();
+        final ArrayList<Game> currgames = new ArrayList<Game>();
+        String state = (MainMenuStage.isResume) ? "open" : "game";
 
         System.out.println(games.size());
 
         gamesList.clear();
+        currgames.clear();
 
         for(Game tmpGame: games){
+            System.out.println("state:"+tmpGame.getState());
 
-            gamesList.add(tmpGame.getName());
+            if(tmpGame.getState().equalsIgnoreCase(state)) {
+                gamesList.add(tmpGame.getName());
+                currgames.add(tmpGame);
+            }
+       //     else games.remove(tmpGame);
 
         }
 
@@ -194,7 +202,7 @@ public class SearchStage {
         final Label lBoardTypeE = new Label(games.get(0).getBoard(), labelStyle);
         final Label lCreator = new Label(fields.get("Creator"), labelStyle);
         final Label lCreatorE = new Label(games.get(0).getWhite().getFirstName() + ' ' +
-                games.get(0).getWhite().getLastName(), labelStyle);
+                                          games.get(0).getWhite().getLastName(), labelStyle);
         final Label lDescription = new Label(fields.get("Description"), labelStyle);
         final Label lDescriptionE = new Label(games.get(0).getDescription(), labelStyle);
         final TextButton buttonBack = new TextButton(fields.get("<- Back"), style);
@@ -213,12 +221,9 @@ public class SearchStage {
         table.add(tableGameList);
         //**************Game Detail section
         Table tableGameDetail = new Table();
-      //  tableGameDetail.setFillParent(true);
-      //  tableGameDetail.setBackground(tButton);
         tableGameDetail.right().bottom();
 
         tableGameDetail.add(lGameDetail);
-       // tableGameDetail.setBackground(tButton);
         tableGameDetail.row();
 
         tableGameDetail.add(lGameName);
@@ -295,20 +300,20 @@ public class SearchStage {
                 System.out.println("Clicked! Is checked: " + buttonConnect.isChecked());
                 int index = gameList.getSelectedIndex();
 
-               if( games.get(index).getWhite() != null &&
-                       games.get(index).getWhite().getUuid() ==
+               if( currgames.get(index).getWhite() != null &&
+                       currgames.get(index).getWhite().getUuid() ==
                                NetworkClient.userH.curUser.getUuid()){
-                   NetworkClient.gameH.game = games.get(index);
+                   NetworkClient.gameH.game = currgames.get(index);
                    System.out.println("White");
                }else
-               if( games.get(index).getBlack() != null &&
-                       games.get(index).getBlack().getUuid() ==
+               if( currgames.get(index).getBlack() != null &&
+                       currgames.get(index).getBlack().getUuid() ==
                                NetworkClient.userH.curUser.getUuid()){
-                   NetworkClient.gameH.game = games.get(index);
+                   NetworkClient.gameH.game = currgames.get(index);
                 System.out.println("Black");
 
             }else {
-                   networkClient.joinToGame(games.get(index).getGauid());
+                   networkClient.joinToGame(currgames.get(index).getGauid());
                    System.out.println("Join");
                   // System.out.println("Black");
                }

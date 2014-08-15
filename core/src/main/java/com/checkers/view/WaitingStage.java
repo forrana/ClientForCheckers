@@ -126,7 +126,7 @@ public class WaitingStage {
 
         exitButton.addListener(new ChangeListener() {
             public void changed(ChangeEvent event, Actor actor) {
-                dispose();
+                Gdx.app.exit();
             }
         });
         mainMenuButton.addListener(new ChangeListener() {
@@ -173,6 +173,5 @@ public class WaitingStage {
 
     public void dispose() {
         stage.dispose();
-        skin.dispose();
     }
 }

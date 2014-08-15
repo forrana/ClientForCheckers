@@ -38,6 +38,7 @@ public class MainMenuStage {
     CheckersClient thisClient;
 
     private static TextureRegion cellWhiteTexture;
+    public static boolean isResume;
 
     public MainMenuStage(CheckersClient client){
         thisClient = client;
@@ -119,7 +120,7 @@ public class MainMenuStage {
 //**********************Listeners
         connGame.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
-
+                isResume = true;
                 thisClient.setScreen(thisClient.search);
 
             }
@@ -133,7 +134,7 @@ public class MainMenuStage {
         });
         retGame.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
-
+                isResume = false;
                 thisClient.setScreen(thisClient.search);
 
             }

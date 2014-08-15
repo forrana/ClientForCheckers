@@ -59,11 +59,6 @@ public class GameListener implements Runnable{
         }
         }catch(Exception e){}
         //NetworkClient.gameH.listenObjectsHandler
-//        System.out.println("Game listener cancel:"+objectsHandler.getListenObjects().getGame().getGauid());
-//        System.out.println("listener state:"+objectsHandler.getListenObjects().getGame().getState());
-//        System.out.println("listener gauid:"+objectsHandler.getListenObjects().getGame().getGauid());
-
-//		System.out.println("IsCanceled");
         isCancel =  true;
     }
 
